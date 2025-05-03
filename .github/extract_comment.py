@@ -38,3 +38,14 @@ for file in pr.get_files():
     cf = repo.get_contents(file.filename, ref=pr.head.sha)
     content = base64.b64decode(cf.content).decode("utf-8")
     print(content)
+
+# Send to FastAPI endpoint
+fastapi_url = "http://your-fastapi-server/pr-comments"  # Change this to your actual FastAPI endpoint
+payload = {
+    "comment": comment_body,
+    "files": files,
+    "pr_number": pr_number,
+    "repo": repo_full_name
+}
+response = requests.post(fastapi_url, json=payload)
+print(f"FastAPI response: {response.status_code} {response.text}")
