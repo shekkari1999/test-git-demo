@@ -1,6 +1,7 @@
 import os
 import json
 import base64
+import requests
 from github import Github
 
 # Path to the GitHub Actions event payload
@@ -30,14 +31,11 @@ gh = Github(token)
 repo = gh.get_repo(repo_full_name)
 pr = repo.get_pull(pr_number)
 
-print(f"Comment: {comment_body}")
-print("Changed files and their contents:")
-
+files = []
 for file in pr.get_files():
-    print(f"\n=== {file.filename} ===")
     cf = repo.get_contents(file.filename, ref=pr.head.sha)
     content = base64.b64decode(cf.content).decode("utf-8")
-    print(content)
+    files.append({"filename": file.filename, "content": content})
 
 fastapi_url = "http://127.0.0.1:8000/pr-comments"
 payload = {
