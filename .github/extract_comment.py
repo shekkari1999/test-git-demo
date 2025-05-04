@@ -37,7 +37,7 @@ for file in pr.get_files():
     content = base64.b64decode(cf.content).decode("utf-8")
     files.append({"filename": file.filename, "content": content})
 
-fastapi_url = "http://127.0.0.1:8000/pr-comments"
+fastapi_url = "http://54.144.110.11:8000/pr-comments"
 payload = {
     "comment": comment_body,
     "files": files
