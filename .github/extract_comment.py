@@ -42,5 +42,11 @@ payload = {
     "comment": comment_body,
     "files": files
 }
+try:
+    json_str = json.dumps(payload)
+    print("Payload is valid JSON.")
+except Exception as e:
+    print("Payload is NOT valid JSON:", e)
+    
 response = requests.post(fastapi_url, json=payload)
 print(f"FastAPI response: {response.status_code} {response.text}")
