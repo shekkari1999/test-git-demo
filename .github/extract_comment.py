@@ -37,7 +37,7 @@ for file in pr.get_files():
     content = base64.b64decode(cf.content).decode("utf-8")
     files.append({"filename": file.filename, "content": content})
 
-fastapi_url = "http://54-146-216-14:8000/infer"
+fastapi_url = "https://huggingface.co/spaces/shekkari21/AICodeReviewer/pr-comments"
 payload = {
     "comment": comment_body,
     "files": files
