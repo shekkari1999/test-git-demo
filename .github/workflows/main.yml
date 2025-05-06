@@ -26,6 +26,6 @@ jobs:
 
       - name: Run AI suggestion + create PR
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GH_PAT }}
           FASTAPI_URL:   ${{ secrets.FASTAPI_URL }}
         run: python .github/extract_comment.py
