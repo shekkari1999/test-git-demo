@@ -42,6 +42,7 @@ payload = {
     "comment": comment_body,
     "files": files
 }
+print(payload)
 try:
     json_str = json.dumps(payload)
     print("Payload is valid JSON.")
