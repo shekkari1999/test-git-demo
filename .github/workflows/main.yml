@@ -1,0 +1,23 @@
+name: Extract PR Comment and Files
+
+on:
+  issue_comment:
+    types: [created]
+
+jobs:
+  extract:
+    runs-on: ubuntu-latest
+    if: github.event.issue.pull_request != null
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install dependencies
+        run: pip install PyGithub
+      - name: Extract PR comment and files
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          python .github/extract_comment.py
