@@ -6,7 +6,7 @@ on:
     
 permissions:
   contents: write  
-  pull-requests: writ
+  pull-requests: write
   
 jobs:
   ai_suggest:
