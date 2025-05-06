@@ -2,11 +2,11 @@ import os
 import json
 import base64
 import requests
-from github import Github, GithubException  # import exception class
+from github import Github, GithubException
 
 # 1) inputs from the Actions runner
 EVENT_PATH   = os.environ["GITHUB_EVENT_PATH"]
-FASTAPI_URL  = os.environ["FASTAPI_URL"]      # set in your repo’s secrets
+FASTAPI_URL  = os.environ["FASTAPI_URL"]
 GITHUB_TOKEN = os.environ["GITHUB_TOKEN"]
 
 # 2) load the GH event
@@ -35,17 +35,17 @@ resp    = requests.post(f"{FASTAPI_URL}/infer", json=payload)
 suggest = resp.json()["generated_code"]
 
 # 5) create or update the AI branch
-base_ref   = pr.base.ref                        # e.g. "main"
+base_ref   = pr.base.ref
 base_sha   = repo.get_branch(base_ref).commit.sha
 new_branch = f"ai-fix-pr-{pr_num}"
 ref_full   = f"refs/heads/{new_branch}"
 ref_short  = f"heads/{new_branch}"
+
 try:
     repo.create_git_ref(ref_full, base_sha)
 except GithubException as e:
     if e.status == 422:
-        # branch already exists → move its tip
-        repo.get_git_ref(ref_short).edit(base_sha)
+        repo.get_git_ref(ref_short).edit(base_sha, force=True)
     else:
         raise
 
