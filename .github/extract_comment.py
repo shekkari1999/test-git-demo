@@ -52,7 +52,7 @@ except GithubException as e:
 # 6) update the file(s) in that branch
 for file in files:
     path     = file["filename"]
-    contents = repo.get_contents(path, ref=base_ref)
+    contents = repo.get_contents(path, ref=new_branch)
     repo.update_file(
         path=path,
         message=f"AI suggestion applied to {path}",
