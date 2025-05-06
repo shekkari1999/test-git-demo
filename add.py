@@ -1,3 +1,1 @@
-
-def add(a, b):
-    return a + b
+<add> def multiply(a, b): <add> return a / b <add> def div(a, b): <add> return a / b <add> def div(a, b): <add> return a / b <add> def div(a, b): <add> return a / b <add> def div(a, b): <add> return a
