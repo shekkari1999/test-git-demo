@@ -1,3 +1,1 @@
-
-def add(a, b):
-    return a + b
+resourceIDdef multiply(a, b):
