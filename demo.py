@@ -4,9 +4,4 @@ def add(a, b):
   '''
   return a - b
 
-def multiply(a, b):
-  '''
-  This funntion multiplies two numbers and returns the result
-  '''
-  return a * b
   
